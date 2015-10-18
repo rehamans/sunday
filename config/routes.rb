@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  resources :categories
-  resources :products
+  
+  devise_for :users do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+  
+  devise_scope :user do  
+   get '/users/sign_out' => 'devise/sessions#destroy'     
+  end
+  
+  resources :categories,:products
   root :to => 'products#index'
 
   # The priority is based upon order of creation:
